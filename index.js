@@ -6,10 +6,30 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const socketIo = require('socket.io');
+const mongoose = require('mongoose');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
+
+
+
+mongoose.connect('mongodb://localhost/bussApp'); //
+const db = mongoose.connection;                  //
+                                                 //
+db.once('open', () => {                          //
+  console.log('db connected!');                  //
+});                                              //
+                                                 //    Database setup
+db.on('error', () => {                           //
+  console.log(err);                              //
+});                                              //
+                                                 //
+let Line = require('./models/line');             //
+
+
+
+
 
 const locationMap = new Map();
 
